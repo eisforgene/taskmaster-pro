@@ -114,6 +114,9 @@ $("#trash").droppable({
   }
 });
 
+$("#modalDueDate").datepicker({
+  minDate: 1
+});
 
 // modal was triggered
 $("#task-form-modal").on("show.bs.modal", function() {
@@ -203,7 +206,16 @@ $(".list-group").on("click", "span", function() {
     .attr("type", "text")
     .addClass("form-control")
     .val(date);
+
   $(this).replaceWith(dateInput);
+
+  // enable jquery ui datepicker
+  dateInput.datepicker ({
+    minDate: 1,
+    onClose: function() {
+      $(this).trigger("change");
+    }
+  });
 
   // automatically bring up the calendar
   dateInput.trigger("focus");
